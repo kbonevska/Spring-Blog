@@ -1,6 +1,5 @@
 package com.spring.project.controller;
 
-
 import com.spring.project.entity.Article;
 import com.spring.project.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,7 @@
 package com.spring.project.service;
 
-
-import com.spring.project.entity.User;
-import com.spring.project.repository.UserRepository;
+import blog.entity.User;
+import blog.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +22,7 @@ public class BlogUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user;
-		user = userRepository.findByEmail(email);
+		User user = userRepository.findByEmail(email);
 
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid User");
