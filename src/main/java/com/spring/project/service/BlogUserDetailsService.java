@@ -1,7 +1,8 @@
 package com.spring.project.service;
 
-import blog.entity.User;
-import blog.repository.UserRepository;
+
+import com.spring.project.entity.User;
+import com.spring.project.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
