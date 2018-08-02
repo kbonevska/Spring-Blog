@@ -1,6 +1,6 @@
 package com.spring.project.service;
 
-import blog.entity.User;
+
 import com.spring.project.entity.User;
 
 public interface UserService {

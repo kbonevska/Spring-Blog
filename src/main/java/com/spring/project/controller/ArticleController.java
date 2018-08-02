@@ -1,10 +1,11 @@
 package com.spring.project.controller;
 
-import blog.bindingModel.ArticleBindingModel;
-import blog.entity.Article;
-import blog.entity.User;
-import blog.repository.ArticleRepository;
-import blog.repository.UserRepository;
+
+import com.spring.project.bindingModel.ArticleBindingModel;
+import com.spring.project.entity.Article;
+import com.spring.project.entity.User;
+import com.spring.project.repository.ArticleRepository;
+import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;

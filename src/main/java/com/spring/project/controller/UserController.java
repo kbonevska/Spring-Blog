@@ -1,9 +1,10 @@
 package com.spring.project.controller;
 
-import blog.bindingModel.UserBindingModel;
-import blog.entity.User;
-import blog.repository.UserRepository;
-import blog.service.UserService;
+
+import com.spring.project.bindingModel.UserBindingModel;
+import com.spring.project.entity.User;
+import com.spring.project.repository.UserRepository;
+import com.spring.project.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
