@@ -1,9 +1,10 @@
 package com.spring.project.service;
 
-import blog.entity.Role;
-import blog.entity.User;
-import blog.repository.RoleRepository;
-import blog.repository.UserRepository;
+
+import com.spring.project.entity.Role;
+import com.spring.project.entity.User;
+import com.spring.project.repository.RoleRepository;
+import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
