@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    List<Article> findArticlesByTitle(String pSearchTerm);
+    List<Article> findArticlesByTitleContains(String pSearchTerm);
 }
