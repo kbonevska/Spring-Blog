@@ -36,8 +36,8 @@
                     </a>
                 </li>
                 <li class="nav-item" id="search">
-                    <form class="form-inline my-2 my-lg-0" >
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search"/>
+                    <form th:action="@{/}" th:method="post"  class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" name="title" placeholder="Search"/>
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
