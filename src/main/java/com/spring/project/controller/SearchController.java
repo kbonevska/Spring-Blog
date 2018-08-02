@@ -22,7 +22,7 @@ public class SearchController {
 
     @PostMapping(value = "/")
     public String search(@RequestParam("title") String pSearchTerm, Model model) {
-        List<Article> articles = this.articleRepository.findArticlesByTitle(pSearchTerm);
+        List<Article> articles = this.articleRepository.findArticlesByTitleContains(pSearchTerm);
 
         model.addAttribute("searchTerm", pSearchTerm);
         model.addAttribute("view", "home/index");
