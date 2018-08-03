@@ -1,6 +1,7 @@
 package com.spring.project.service;
 
 
+import com.spring.project.bindingModel.UserBindingModel;
 import com.spring.project.entity.Role;
 import com.spring.project.entity.User;
 import com.spring.project.repository.RoleRepository;
@@ -21,14 +22,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String fullName, String password, String email) {
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    @Override
+    public boolean register(UserBindingModel userBindingModel) {
+        if (!userBindingModel.getPassword().equals(userBindingModel.getConfirmPassword())) {
+            return false;
+        }
+        if(findByEmail(userBindingModel.getEmail()) != null){
+            return false;
+        }
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
         User user = new User();
-        user.setFullName(fullName);
-        user.setPassword(bCryptPasswordEncoder.encode(password));
-        user.setEmail(email);
+        user.setFullName(userBindingModel.getFullName());
+        user.setPassword(bCryptPasswordEncoder.encode(userBindingModel.getPassword()));
+        user.setEmail(userBindingModel.getEmail());
 
         Role userRole = this.roleRepository.findByName("ROLE_USER");
 
@@ -36,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.saveAndFlush(user);
 
-        return this.userRepository.saveAndFlush(user);
+        return true;
     }
 
 }

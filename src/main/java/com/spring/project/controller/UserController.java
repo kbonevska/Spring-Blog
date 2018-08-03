@@ -25,7 +25,6 @@ public class UserController {
 
     private final UserService userService;
     private final UserRepository userRepository;
-
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
@@ -40,11 +39,9 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerProcess(UserBindingModel userBindingModel) {
-        if (!userBindingModel.getPassword().equals(userBindingModel.getConfirmPassword())) {
+        if(!userService.register(userBindingModel) ){
             return "redirect:/register";
         }
-        this.userService.register(userBindingModel.getFullName(), userBindingModel.getPassword(), userBindingModel.getEmail());
-
         return "redirect:/login";
     }
 
