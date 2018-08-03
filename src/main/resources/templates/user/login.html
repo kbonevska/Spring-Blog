@@ -21,8 +21,12 @@
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <a class="btn btn-default" th:href="@{/}">Cancel</a>
+                            <div class="form-group form-check ">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberMe">
+                                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                            </div>
                             <button type="submit" class="btn btn-primary">Login</button>
+                            <a class="btn btn-secondary" th:href="@{/}">Cancel</a>
                         </div>
                     </div>
                 </fieldset>
