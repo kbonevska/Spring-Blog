@@ -1,9 +1,8 @@
 package com.spring.project.controller;
 
-
-import com.spring.project.bindingModel.ArticleBindingModel;
 import com.spring.project.entity.Article;
 import com.spring.project.entity.User;
+import com.spring.project.model.ArticleBindingModel;
 import com.spring.project.repository.ArticleRepository;
 import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ArticleController {
 
-    @Autowired
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public ArticleController(ArticleRepository articleRepository, UserRepository userRepository) {
+        this.articleRepository = articleRepository;
+        this.userRepository = userRepository;
+    }
 
 
     @GetMapping("/article/create")
@@ -33,21 +36,7 @@ public class ArticleController {
         return "base-layout";
     }
 
-    public ArticleRepository getArticleRepository() {
-        return articleRepository;
-    }
 
-    public void setArticleRepository(ArticleRepository articleRepository) {
-        this.articleRepository = articleRepository;
-    }
-
-    public UserRepository getUserRepository() {
-        return userRepository;
-    }
-
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @PostMapping("/article/create")
     @PreAuthorize("isAuthenticated()")
@@ -72,11 +61,11 @@ public class ArticleController {
 
     @GetMapping("/article/{id}")
     public String details(Model model, @PathVariable Long id) {
-        if (!this.articleRepository.exists(id)) {
+        if (!this.articleRepository.existsById(id)) {
             return "redirect:/";
         }
 
-        Article article = this.articleRepository.findOne(id);
+        Article article = this.articleRepository.getOne(id);
 
         model.addAttribute("view", "article/details");
         model.addAttribute("article", article);

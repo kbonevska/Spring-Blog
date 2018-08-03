@@ -1,4 +1,4 @@
-package com.spring.project.bindingModel;
+package com.spring.project.model;
 
 import javax.validation.constraints.NotNull;
 

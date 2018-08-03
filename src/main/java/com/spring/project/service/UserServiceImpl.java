@@ -1,9 +1,9 @@
 package com.spring.project.service;
 
 
-import com.spring.project.bindingModel.UserBindingModel;
 import com.spring.project.entity.Role;
 import com.spring.project.entity.User;
+import com.spring.project.model.UserBindingModel;
 import com.spring.project.repository.RoleRepository;
 import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

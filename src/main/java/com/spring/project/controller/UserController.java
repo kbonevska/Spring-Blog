@@ -1,7 +1,7 @@
 package com.spring.project.controller;
 
 
-import com.spring.project.bindingModel.UserBindingModel;
+import com.spring.project.model.UserBindingModel;
 import com.spring.project.entity.User;
 import com.spring.project.repository.UserRepository;
 import com.spring.project.service.UserService;
@@ -52,11 +52,9 @@ public class UserController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-
         return "redirect:/login?logout";
     }
 
