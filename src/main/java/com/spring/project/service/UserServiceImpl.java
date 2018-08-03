@@ -7,6 +7,8 @@ import com.spring.project.entity.User;
 import com.spring.project.repository.RoleRepository;
 import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,15 @@ public class UserServiceImpl implements UserService {
         this.userRepository.saveAndFlush(user);
 
         return true;
+    }
+
+    @Override
+    public User getProfilePage() {
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        return this.userRepository.findByEmail(principal.getUsername());
     }
 
 }
