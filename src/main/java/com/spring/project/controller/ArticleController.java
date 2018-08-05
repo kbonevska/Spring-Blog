@@ -7,6 +7,7 @@ import com.spring.project.repository.ArticleRepository;
 import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,16 @@ public class ArticleController {
     public String details(Model model, @PathVariable Long id) {
         if (!this.articleRepository.existsById(id)) {
             return "redirect:/";
+        }
+
+        if (!(SecurityContextHolder.getContext().getAuthentication()
+        instanceof AnonymousAuthenticationToken)){
+            UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
+                    .getAuthentication().getPrincipal();
+
+            User entityUser = this.userRepository.findByEmail(principal.getUsername());
+
+            model.addAttribute("user", entityUser);
         }
 
         Article article = this.articleRepository.getOne(id);
