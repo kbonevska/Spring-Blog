@@ -38,10 +38,11 @@ public class UserServiceImpl implements UserService {
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        User user = new User();
-        user.setFullName(userBindingModel.getFullName());
-        user.setPassword(bCryptPasswordEncoder.encode(userBindingModel.getPassword()));
-        user.setEmail(userBindingModel.getEmail());
+        User user = new User(
+                userBindingModel.getEmail(),
+                userBindingModel.getFullName(),
+                bCryptPasswordEncoder.encode(userBindingModel.getPassword())
+        );
 
         Role userRole = this.roleRepository.findByName("ROLE_USER");
 
