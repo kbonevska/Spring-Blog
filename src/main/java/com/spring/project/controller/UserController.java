@@ -1,6 +1,7 @@
 package com.spring.project.controller;
 
 
+import com.spring.project.entity.Article;
 import com.spring.project.model.UserBindingModel;
 import com.spring.project.entity.User;
 import com.spring.project.repository.RoleRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -70,6 +72,9 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public String profilePage(Model model) {
         User user = userService.getProfilePage();
+        List<Article> articles =userService.getArticles();
+
+        model.addAttribute("articles",articles);
         model.addAttribute("user", user);
         model.addAttribute("view", "user/profile");
         return "base-layout";
