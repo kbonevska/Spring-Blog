@@ -1,9 +1,11 @@
 package com.spring.project.service;
 
 
+import com.spring.project.entity.Article;
 import com.spring.project.entity.Role;
 import com.spring.project.entity.User;
 import com.spring.project.model.UserBindingModel;
+import com.spring.project.repository.ArticleRepository;
 import com.spring.project.repository.RoleRepository;
 import com.spring.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final ArticleRepository articleRepository;
     @Autowired
-    public UserServiceImpl(RoleRepository roleRepository, UserRepository userRepository) {
+    public UserServiceImpl(RoleRepository roleRepository, UserRepository userRepository, ArticleRepository articleRepository) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
+        this.articleRepository = articleRepository;
     }
 
     @Override
@@ -60,6 +67,21 @@ public class UserServiceImpl implements UserService {
                 .getPrincipal();
 
         return this.userRepository.findByEmail(principal.getUsername());
+    }
+
+    @Override
+    public List<Article> getArticles() {
+
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        List<Article> articles = this.articleRepository.findAll().stream()
+                .filter(article -> article.getAuthor().getEmail().equals(principal.getUsername()))
+                .collect(Collectors.toList());
+
+        return articles;
+
     }
 
 }
